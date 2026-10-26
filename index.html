@@ -263,6 +263,128 @@
       }
     }
 
+    /* ── drawing board ── */
+    .arena {
+      max-width: 640px;
+      margin: 0 auto;
+    }
+
+    .bar {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: center;
+      align-items: center;
+      gap: 12px;
+      margin-bottom: 8px;
+    }
+
+    .theme {
+      font-size: 1.6rem;
+      font-weight: 700;
+    }
+
+    .theme span {
+      color: var(--coral);
+    }
+
+    .prompt-bar {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: center;
+      align-items: center;
+      gap: 8px;
+      margin-bottom: 14px;
+    }
+
+    .custom-prompt-input {
+      font: inherit;
+      font-size: 1.15rem;
+      color: var(--ink);
+      background: var(--card);
+      border: 3px solid var(--line);
+      border-radius: 10px 7px 11px 8px;
+      padding: 5px 14px;
+      outline: none;
+      width: 250px;
+      max-width: 100%;
+      transition: border-color .15s;
+    }
+
+    .custom-prompt-input:focus {
+      border-color: var(--coral);
+    }
+
+    canvas#cv {
+      display: block;
+      width: 100%;
+      height: min(48vh, 340px);
+      background: #fff;
+      border: 3px solid var(--line);
+      border-radius: 12px;
+      touch-action: none;
+      cursor: crosshair;
+      box-shadow: 0 4px 16px rgba(0, 0, 0, .04);
+    }
+
+    .tools {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: center;
+      align-items: center;
+      gap: 10px;
+      margin-top: 12px;
+    }
+
+    .sw {
+      width: 32px;
+      height: 32px;
+      border-radius: 50%;
+      border: 3px solid var(--line);
+      cursor: pointer;
+      padding: 0;
+      transition: transform .12s, border-color .12s;
+    }
+
+    .sw:hover {
+      transform: scale(1.15);
+    }
+
+    .sw[aria-pressed="true"] {
+      border-color: var(--ink);
+      transform: scale(1.25);
+      box-shadow: 0 2px 6px rgba(0, 0, 0, .2);
+    }
+
+    .brush-label {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      font-size: 1.15rem;
+      color: var(--gray);
+      margin-left: 6px;
+    }
+
+    .brush-label input[type="range"] {
+      accent-color: var(--coral);
+      cursor: pointer;
+      width: 90px;
+    }
+
+    .board-actions {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: center;
+      align-items: center;
+      gap: 10px;
+      margin-top: 12px;
+    }
+
+    .draw-tip {
+      margin-top: 10px;
+      font-size: 1.1rem;
+      color: var(--gray);
+    }
+
     .panel {
       max-width: 620px;
       margin: 0 auto;
@@ -501,7 +623,8 @@
       <h1>alina arora</h1>
       <p class="sub">graphic designer for brands, illustrations, posters and other cute stuff</p>
       <div class="hero-deco" aria-hidden="true"></div>
-      <div><a class="btn b" href="#work" id="hero-cta-work">see work</a><a class="btn p" href="#about"
+      <div><a class="btn b" href="#work" id="hero-cta-work">see work</a><a class="btn p" href="#draw"
+          id="hero-cta-draw">drawing board</a><a class="btn small" href="#about"
           id="hero-cta-about">get in touch</a></div>
     </header>
 
@@ -517,7 +640,35 @@
       <div class="grid" id="grid"></div>
     </section>
 
-
+    <section id="draw">
+      <h2 class="ul">drawing board</h2>
+      <div class="arena">
+        <div class="bar">
+          <span class="theme" id="theme">draw: <span id="prompt-target">a sleepy robot</span></span>
+        </div>
+        <div class="prompt-bar">
+          <input type="text" id="custom-prompt-input" class="custom-prompt-input" placeholder="write your own prompt..." maxlength="45" aria-label="custom prompt">
+          <button class="btn p small" id="set-prompt-btn" type="button">set prompt</button>
+          <button class="btn b small" id="next-prompt-btn" type="button">random prompt</button>
+        </div>
+        <canvas id="cv" aria-label="drawing canvas"></canvas>
+        <div class="tools" id="tools">
+          <button class="sw" style="background:#1d1d1d" aria-label="black" aria-pressed="true" data-c="#1d1d1d" title="black"></button>
+          <button class="sw" style="background:#FF6B4A" aria-label="coral" aria-pressed="false" data-c="#FF6B4A" title="coral"></button>
+          <button class="sw" style="background:#2A8FB7" aria-label="blue" aria-pressed="false" data-c="#2A8FB7" title="blue"></button>
+          <button class="sw" style="background:#2E9E5B" aria-label="green" aria-pressed="false" data-c="#2E9E5B" title="green"></button>
+          <button class="sw" style="background:#FFA63D" aria-label="orange" aria-pressed="false" data-c="#FFA63D" title="orange"></button>
+          <button class="sw" style="background:#F7C6FF" aria-label="pink" aria-pressed="false" data-c="#F7C6FF" title="pink"></button>
+          <button class="sw" style="background:#ffffff;box-shadow:inset 0 0 0 1px #d9d4bd" aria-label="eraser" aria-pressed="false" data-c="#ffffff" title="eraser"></button>
+          <label class="brush-label">brush <input type="range" id="size" min="2" max="28" value="7"></label>
+        </div>
+        <div class="board-actions">
+          <button class="btn small" id="clear-board" type="button" style="background:var(--card);box-shadow:-3px 4px 0 var(--line)">clear</button>
+          <button class="btn b small" id="save-board" type="button">save doodle</button>
+        </div>
+        <div class="draw-tip" id="draw-tip">pick colors, doodle whatever you like, or write your own prompt!</div>
+      </div>
+    </section>
 
     <section id="about">
       <h2 class="ul">about</h2>
@@ -534,8 +685,8 @@
       </div>
     </section>
 
-    <footer><a href="#work">work</a>|<a href="#about">about</a>|<a href="#">instagram</a>|<a href="#">behance</a>|<a
-        href="mailto:hello@example.com">email</a></footer>
+    <footer><a href="#work">work</a>|<a href="#draw">drawing board</a>|<a href="#about">about</a>|<a href="#">instagram</a>|<a href="#">behance</a>|<a
+        href="mailto:alina.arora21@gmail.com">email</a></footer>
   </div>
 
   <!-- expanded work modal -->
@@ -660,6 +811,140 @@
     });
     $("#chips").addEventListener("click", e => { const b = e.target.closest(".chip"); if (!b) return; filter = b.dataset.f; $$(".chip").forEach(x => x.setAttribute("aria-pressed", x === b)); render() });
     render();
+
+    /* ── Drawing board & custom prompts ── */
+    const prompts = [
+      "a sleepy robot",
+      "a cat chef",
+      "a tiny dragon",
+      "a haunted teapot",
+      "a surfing octopus",
+      "a friendly cloud",
+      "a coffee mug with wings",
+      "a cozy mushroom house",
+      "a flower wearing sunglasses",
+      "a magic envelope",
+      "a skateboarding frog",
+      "a happy potted cactus"
+    ];
+
+    let currentPrompt = prompts[0];
+    const promptTarget = $("#prompt-target");
+    const customPromptInput = $("#custom-prompt-input");
+
+    function updatePrompt(text) {
+      if (!text || !text.trim()) return;
+      currentPrompt = text.trim();
+      promptTarget.textContent = currentPrompt;
+      customPromptInput.value = "";
+    }
+
+    $("#next-prompt-btn").addEventListener("click", () => {
+      let next;
+      do {
+        next = prompts[Math.floor(Math.random() * prompts.length)];
+      } while (next === currentPrompt && prompts.length > 1);
+      updatePrompt(next);
+    });
+
+    $("#set-prompt-btn").addEventListener("click", () => {
+      if (customPromptInput.value.trim()) {
+        updatePrompt(customPromptInput.value);
+      }
+    });
+
+    customPromptInput.addEventListener("keydown", e => {
+      if (e.key === "Enter") {
+        e.preventDefault();
+        if (customPromptInput.value.trim()) {
+          updatePrompt(customPromptInput.value);
+        }
+      }
+    });
+
+    const cv = $("#cv"), ctx = cv.getContext("2d"), dpr = () => window.devicePixelRatio || 1;
+    let drawColor = "#1d1d1d", isDrawing = false, lastPos = null;
+
+    function blankCanvas() {
+      ctx.fillStyle = "#ffffff";
+      ctx.fillRect(0, 0, cv.width, cv.height);
+      ctx.lineCap = "round";
+      ctx.lineJoin = "round";
+    }
+
+    function fitCanvas() {
+      const r = cv.getBoundingClientRect();
+      if (!r.width) return;
+      let img = null;
+      try {
+        img = ctx.getImageData(0, 0, cv.width, cv.height);
+      } catch (e) {}
+      cv.width = r.width * dpr();
+      cv.height = r.height * dpr();
+      blankCanvas();
+      if (img && img.width) {
+        ctx.putImageData(img, 0, 0);
+      }
+    }
+
+    fitCanvas();
+    window.addEventListener("resize", fitCanvas);
+
+    const getPos = e => {
+      const r = cv.getBoundingClientRect();
+      return [
+        (e.clientX - r.left) * cv.width / r.width,
+        (e.clientY - r.top) * cv.height / r.height
+      ];
+    };
+
+    function drawStroke(a, b) {
+      ctx.strokeStyle = drawColor;
+      ctx.lineWidth = +$("#size").value * dpr();
+      ctx.beginPath();
+      ctx.moveTo(...a);
+      ctx.lineTo(...b);
+      ctx.stroke();
+    }
+
+    cv.addEventListener("pointerdown", e => {
+      cv.setPointerCapture(e.pointerId);
+      isDrawing = true;
+      lastPos = getPos(e);
+      drawStroke(lastPos, lastPos);
+    });
+
+    cv.addEventListener("pointermove", e => {
+      if (!isDrawing) return;
+      const p = getPos(e);
+      drawStroke(lastPos, p);
+      lastPos = p;
+    });
+
+    const stopDrawing = () => { isDrawing = false; };
+    cv.addEventListener("pointerup", stopDrawing);
+    cv.addEventListener("pointercancel", stopDrawing);
+
+    $("#tools").addEventListener("click", e => {
+      const b = e.target.closest(".sw");
+      if (!b) return;
+      drawColor = b.dataset.c;
+      $$(".sw").forEach(x => x.setAttribute("aria-pressed", x === b));
+    });
+
+    $("#clear-board").addEventListener("click", () => {
+      blankCanvas();
+      $("#draw-tip").textContent = "fresh canvas ready! draw something cute :)";
+    });
+
+    $("#save-board").addEventListener("click", () => {
+      const link = document.createElement("a");
+      const cleanPrompt = currentPrompt.toLowerCase().replace(/[^a-z0-9]+/g, "-").replace(/^-+|-+$/g, "");
+      link.download = `doodle-${cleanPrompt || "sketch"}.png`;
+      link.href = cv.toDataURL("image/png");
+      link.click();
+      $("#draw-tip").textContent = "doodle downloaded! \uD83C\uDFA8";
+    });
   </script>
 </body>
 

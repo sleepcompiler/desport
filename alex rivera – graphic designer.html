@@ -1,0 +1,179 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>alex rivera – graphic designer</title>
+<link href="https://fonts.googleapis.com/css2?family=Gaegu:wght@400;700&display=swap" rel="stylesheet">
+<style>
+:root{--bg:#FFF9D6;--ink:#1d1d1d;--gray:#7a7768;--line:#d9d4bd;--card:#fffdf0;--coral:#FF6B4A;--green:#2E9E5B;--orange:#FFA63D;
+--blue:#7FDBFF;--blueD:#2A8FB7;--pink:#F7C6FF;--pinkD:#A86BB8;--link:#2A8FB7;
+box-sizing:border-box;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}
+@media (prefers-color-scheme:dark){:root:not([data-theme="light"]){--bg:#26241a;--ink:#f4efd8;--gray:#a8a38c;--line:#4a4636;--card:#312e22;--link:#7FDBFF}}
+:root[data-theme="dark"]{--bg:#26241a;--ink:#f4efd8;--gray:#a8a38c;--line:#4a4636;--card:#312e22;--link:#7FDBFF}
+html{scroll-padding-top:env(safe-area-inset-top,0px);scroll-behavior:smooth}
+*,*::before,*::after{box-sizing:border-box}
+body{margin:0;background:var(--bg);color:var(--ink);font:400 1.3rem/1.4 Gaegu,"Comic Sans MS","Comic Neue",cursive;text-align:center}
+h1,h2,h3{font-weight:700;margin:0;line-height:1.1}
+h1{font-size:clamp(3rem,10vw,5rem)}
+h2{font-size:2.4rem}
+a{color:var(--link)}
+.wrap{max-width:760px;margin:0 auto;padding:40px 20px 0}
+.sub{color:var(--gray);margin:10px 0 0}
+.ul{display:inline-block;border-bottom:4px solid var(--ink);border-radius:2px 60% 3px 80%/2px 5px 2px 4px;padding:0 40px 6px;margin-bottom:22px}
+.btn{font:inherit;font-weight:700;font-size:1.4rem;color:#1d1d1d;border:0;cursor:pointer;padding:12px 30px;margin:6px;border-radius:12px 8px 14px 9px/9px 13px 8px 12px;transform:rotate(-1.5deg);transition:transform .1s,box-shadow .1s;text-decoration:none;display:inline-block}
+.btn.b{background:var(--blue);box-shadow:-3px 4px 0 var(--blueD)}
+.btn.p{background:var(--pink);box-shadow:-3px 4px 0 var(--pinkD);transform:rotate(1.2deg)}
+.btn:hover{transform:rotate(0) translateY(-2px)}
+.btn:active{transform:translate(-3px,4px);box-shadow:none}
+.btn.small{font-size:1.1rem;padding:6px 18px}
+:focus-visible{outline:3px dashed var(--coral);outline-offset:3px}
+.stage{position:relative;height:300px;max-width:700px;margin:26px auto 0}
+.stage svg{position:absolute;left:50%;top:10px;transform:translateX(-50%);width:210px;height:230px}
+.g{position:absolute;white-space:nowrap;font-size:1.25rem}
+.g i{font-style:normal;color:var(--coral);margin-right:4px}.g em{font-style:normal;color:var(--coral)}
+.g.ok i,.g.ok em{color:var(--green)}
+.how{display:inline-block;text-align:left;background:var(--card);border:3px solid var(--line);border-radius:12px;padding:12px 18px;color:var(--gray);margin-top:10px}
+.how div{padding:3px 0}.how b{margin-right:8px}
+section{padding-top:70px}
+section>h2.c{color:var(--coral)}
+.chips{display:flex;flex-wrap:wrap;justify-content:center;gap:8px;margin-bottom:22px}
+.chip{font:inherit;font-size:1.15rem;color:var(--ink);background:var(--card);border:3px solid var(--line);border-radius:10px 7px 11px 8px;padding:2px 16px;cursor:pointer}
+.chip[aria-pressed="true"]{border-color:var(--blueD);background:var(--blue);color:#1d1d1d}
+.grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(220px,1fr));gap:20px}
+.work{background:var(--card);border:3px solid var(--line);border-radius:12px;padding:8px;text-align:left}
+.work:nth-child(odd){transform:rotate(-.8deg)}.work:nth-child(even){transform:rotate(.8deg)}
+.work svg{display:block;width:100%;height:auto;border-radius:8px}
+.meta{display:flex;justify-content:space-between;align-items:center;padding:8px 4px 0;gap:8px}
+.meta h3{font-size:1.3rem}.meta small{display:block;color:var(--gray);font-size:1.05rem}
+.like{font:inherit;font-size:1.15rem;color:var(--gray);background:none;border:3px solid var(--line);border-radius:999px;padding:0 12px;cursor:pointer}
+.like[aria-pressed="true"]{color:var(--coral);border-color:var(--coral)}
+.like.pop{animation:pop .25s}@keyframes pop{50%{transform:scale(1.3)}}
+.arena{max-width:640px;margin:0 auto}
+.bar{display:flex;flex-wrap:wrap;justify-content:center;align-items:center;gap:12px;margin-bottom:10px}
+.theme{font-size:1.6rem;font-weight:700}.theme span{color:var(--coral)}
+.timer{font-size:1.6rem;color:var(--gray)}.timer.low{color:var(--coral)}
+canvas{display:block;width:100%;height:min(48vh,340px);background:#fff;border:3px solid var(--line);border-radius:12px;touch-action:none;cursor:crosshair}
+.tools{display:flex;flex-wrap:wrap;justify-content:center;align-items:center;gap:10px;margin-top:10px}
+.sw{width:30px;height:30px;border-radius:50%;border:3px solid var(--line);cursor:pointer;padding:0}
+.sw[aria-pressed="true"]{border-color:var(--ink);transform:scale(1.2)}
+.result{margin-top:12px;min-height:90px;color:var(--gray)}
+.panel{max-width:620px;margin:0 auto;background:var(--card);border:3px solid var(--line);border-radius:12px;text-align:left}
+.row{display:grid;grid-template-columns:110px 1fr;gap:12px;padding:14px 18px;border-top:3px solid var(--line)}
+.row:first-child{border-top:0}
+.row>b{font-weight:400}.row p{margin:0;color:var(--gray)}
+footer{padding:70px 0 40px;color:var(--gray);font-size:1.05rem}
+footer a{color:var(--gray);text-decoration:none;margin:0 4px}footer a:hover{text-decoration:underline}
+@media(max-width:620px){.stage{height:auto;display:flex;flex-direction:column;gap:6px;align-items:center}.stage svg{position:static;transform:none;order:-1}.g{position:static!important;transform:none!important}.row{grid-template-columns:1fr;gap:2px}}
+@media(prefers-reduced-motion:reduce){*{animation:none!important;transition:none!important;scroll-behavior:auto!important}}
+</style>
+</head>
+<body>
+<div class="wrap">
+<header>
+<h1>alex rivera</h1>
+<p class="sub">graphic designer for brands, illustrations and posters</p>
+<div class="stage">
+<span class="g" style="left:0;top:40px;transform:rotate(-3deg)"><i>✗</i>yiwen guessed <em>clipart</em></span>
+<span class="g" style="left:-10px;top:160px;transform:rotate(-1deg)"><i>✗</i>rajeev guessed <em>clip studio</em></span>
+<span class="g" style="right:0;top:36px;transform:rotate(-4deg)"><i>✗</i>sean guessed <em>scribbles</em></span>
+<span class="g ok" style="right:-20px;top:160px;transform:rotate(3deg)"><i>✓</i>rita guessed <em>alex’s portfolio!</em></span>
+<svg viewBox="-110 -110 220 230" fill="none" stroke="currentColor" stroke-width="5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+<g transform="rotate(45)"><path d="M-13 -85V55L0 88L13 55V-85Z"/><path d="M-13 -62H13M-13 40H13"/></g>
+<g transform="rotate(-45)"><path d="M-13 -85V55L0 88L13 55V-85Z" fill="var(--bg)"/><path d="M-13 -62H13M-13 40H13"/></g>
+</svg>
+</div>
+<div style="margin-top:30px"><a class="btn b" href="#work">see work</a><a class="btn p" href="#play">play draw battle</a></div>
+<div class="how" style="margin-top:34px">
+<div><b style="color:var(--orange)">✂</b>browse the work and like your favorites</div>
+<div><b style="color:var(--coral)">✎</b>draw the theme before the clock runs out</div>
+<div><b style="color:var(--green)">↻</b>see if friends guess it, then play again</div>
+</div>
+</header>
+
+<section id="work">
+<h2 class="ul">work</h2>
+<div class="chips" id="chips">
+<button class="chip" aria-pressed="true" data-f="All">all</button>
+<button class="chip" aria-pressed="false" data-f="branding">branding</button>
+<button class="chip" aria-pressed="false" data-f="illustration">illustration</button>
+<button class="chip" aria-pressed="false" data-f="print">print</button>
+<button class="chip" aria-pressed="false" data-f="Likes">most liked</button>
+</div>
+<div class="grid" id="grid"></div>
+</section>
+
+<section id="play">
+<h2 class="ul">draw battle!</h2>
+<div class="arena">
+<div class="bar"><span class="theme" id="theme">draw: <span>a sleepy robot</span></span><span class="timer" id="timer">30</span></div>
+<canvas id="cv" aria-label="drawing canvas"></canvas>
+<div class="tools" id="tools">
+<button class="sw" style="background:#1d1d1d" aria-label="black" aria-pressed="true" data-c="#1d1d1d"></button>
+<button class="sw" style="background:#FF6B4A" aria-label="coral" aria-pressed="false" data-c="#FF6B4A"></button>
+<button class="sw" style="background:#2A8FB7" aria-label="blue" aria-pressed="false" data-c="#2A8FB7"></button>
+<button class="sw" style="background:#2E9E5B" aria-label="green" aria-pressed="false" data-c="#2E9E5B"></button>
+<button class="sw" style="background:#FFA63D" aria-label="orange" aria-pressed="false" data-c="#FFA63D"></button>
+<label>brush <input type="range" id="size" min="2" max="24" value="7"></label>
+</div>
+<div style="margin-top:8px"><button class="btn b small" id="submit">done!</button><button class="btn p small" id="next">new word</button><button class="btn small" id="clear" style="background:var(--card);box-shadow:-3px 4px 0 var(--line)">clear</button></div>
+<div class="result" id="result">start drawing and the clock starts too</div>
+</div>
+</section>
+
+<section id="about">
+<h2 class="ul">about</h2>
+<div class="panel">
+<div class="row"><b>hi</b><p>i’m alex, a graphic designer who likes warm colors, clear ideas and work that makes people smile.</p></div>
+<div class="row"><b>services</b><p>logos and brand systems, illustration and character design, posters, packaging and editorial layouts.</p></div>
+<div class="row"><b>say hi</b><p><a href="mailto:hello@example.com">hello@example.com</a></p></div>
+</div>
+</section>
+
+<footer><a href="#work">work</a>|<a href="#about">about</a>|<a href="#">instagram</a>|<a href="#">behance</a>|<a href="mailto:hello@example.com">email</a></footer>
+</div>
+
+<script>
+const $=s=>document.querySelector(s),$$=s=>document.querySelectorAll(s);
+const words=["a sleepy robot","a cat chef","a logo","a haunted teapot","a surfing octopus","a poster","a tiny dragon","a friendly cloud"];
+const wrong=["pencil","sword","doodle","mess","banana","spaghetti","ghost","potato"];
+const names=["yiwen","sean","rajeev","rita","mina","leo"];
+const cv=$("#cv"),ctx=cv.getContext("2d"),dpr=()=>window.devicePixelRatio||1;
+let color="#1d1d1d",drawing=false,last=null,left=30,tid=null,done=false,word=words[0];
+function blank(){ctx.fillStyle="#fff";ctx.fillRect(0,0,cv.width,cv.height);ctx.lineCap=ctx.lineJoin="round"}
+function fit(){const r=cv.getBoundingClientRect();if(!r.width)return;let img=null;try{img=ctx.getImageData(0,0,cv.width,cv.height)}catch(e){}cv.width=r.width*dpr();cv.height=r.height*dpr();blank();if(img&&img.width)ctx.putImageData(img,0,0)}
+fit();addEventListener("resize",fit);
+const pos=e=>{const r=cv.getBoundingClientRect();return[(e.clientX-r.left)*cv.width/r.width,(e.clientY-r.top)*cv.height/r.height]};
+function stroke(a,b){ctx.strokeStyle=color;ctx.lineWidth=$("#size").value*dpr();ctx.beginPath();ctx.moveTo(...a);ctx.lineTo(...b);ctx.stroke()}
+cv.addEventListener("pointerdown",e=>{if(done)return;cv.setPointerCapture(e.pointerId);drawing=true;last=pos(e);stroke(last,last);clock()});
+cv.addEventListener("pointermove",e=>{if(!drawing)return;const p=pos(e);stroke(last,p);last=p});
+["pointerup","pointercancel"].forEach(t=>cv.addEventListener(t,()=>drawing=false));
+function clock(){if(tid)return;tid=setInterval(()=>{left--;$("#timer").textContent=left;$("#timer").classList.toggle("low",left<=10);if(left<=0)finish()},1000)}
+function reset(msg){clearInterval(tid);tid=null;left=30;done=false;$("#timer").textContent=30;$("#timer").classList.remove("low");blank();$("#result").textContent=msg||"start drawing and the clock starts too"}
+function finish(){if(done)return;clearInterval(tid);tid=null;const d=ctx.getImageData(0,0,cv.width,cv.height).data;let n=0;for(let i=0;i<d.length;i+=64)if(d[i]<250||d[i+1]<250||d[i+2]<250)n++;
+if(n<20){$("#result").textContent="the canvas is empty. draw something first!";return}
+done=true;drawing=false;const p=names.slice().sort(()=>Math.random()-.5),w=wrong.slice().sort(()=>Math.random()-.5);
+$("#result").innerHTML=`<div style="color:#FF6B4A">✗ <span style="color:var(--ink)">${p[0]} guessed</span> ${w[0]}</div><div style="color:#FF6B4A">✗ <span style="color:var(--ink)">${p[1]} guessed</span> ${w[1]}</div><div style="color:#2E9E5B">✓ <span style="color:var(--ink)">${p[2]} guessed</span> ${word.replace(/^an? /,"")}!</div><div style="margin-top:6px">pick “new word” to play again</div>`}
+function pick(){word=words[Math.floor(Math.random()*words.length)];$("#theme").innerHTML="draw: <span>"+word+"</span>"}
+$("#submit").onclick=finish;$("#clear").onclick=()=>reset();$("#next").onclick=()=>{pick();reset()};pick();
+$("#tools").addEventListener("click",e=>{const b=e.target.closest(".sw");if(!b)return;color=b.dataset.c;$$(".sw").forEach(x=>x.setAttribute("aria-pressed",x===b))});
+
+const works=[{t:"bean there",k:"branding",c:["#FFD966","#FF6B4A","#1d1d1d"],s:0},{t:"moon picnic",k:"illustration",c:["#7FDBFF","#FFD966","#ffffff"],s:1},{t:"loud fest",k:"print",c:["#F7C6FF","#2E9E5B","#1d1d1d"],s:2},{t:"pocket dragons",k:"illustration",c:["#B8EFC5","#2A8FB7","#1d1d1d"],s:3},{t:"tidal records",k:"branding",c:["#1d1d1d","#7FDBFF","#FFD966"],s:4},{t:"seed packets",k:"print",c:["#FFE9A8","#2E9E5B","#FF6B4A"],s:5}];
+const likes=works.map((w,i)=>3+i*4%9),liked=works.map(()=>false);
+function art(w){const[a,b,c]=w.c,o='stroke="#1d1d1d" stroke-width="4"';const sh=[
+`<circle cx="130" cy="100" r="64" fill="${b}" ${o}/><rect x="190" y="90" width="110" height="60" rx="14" fill="${c}" ${o}/>`,
+`<circle cx="200" cy="90" r="60" fill="${b}" ${o}/><path d="M0 200Q100 120 200 180T400 150V240H0Z" fill="${c}" ${o}/>`,
+`<rect x="60" y="30" width="110" height="170" fill="${b}" ${o} transform="rotate(-8 115 115)"/><rect x="210" y="50" width="120" height="150" rx="60" fill="${c}" ${o}/>`,
+`<path d="M60 190L130 50L200 190Z" fill="${b}" ${o}/><circle cx="280" cy="110" r="46" fill="${c}" ${o}/>`,
+`<circle cx="130" cy="120" r="56" fill="none" stroke="${b}" stroke-width="20"/><circle cx="270" cy="120" r="56" fill="${c}" ${o}/>`,
+`<rect x="50" y="50" width="90" height="140" rx="45" fill="${b}" ${o}/><rect x="160" y="50" width="90" height="140" rx="12" fill="${c}" ${o}/><circle cx="320" cy="120" r="40" fill="${a}" ${o}/>`][w.s];
+return`<svg viewBox="0 0 400 240" role="img" aria-label="${w.t} artwork"><rect width="400" height="240" fill="${a}"/>${sh}</svg>`}
+let filter="All";
+function render(){let l=works.map((w,i)=>({w,i}));if(filter==="Likes")l.sort((x,y)=>likes[y.i]-likes[x.i]);else if(filter!=="All")l=l.filter(x=>x.w.k===filter);
+$("#grid").innerHTML=l.map(({w,i})=>`<article class="work">${art(w)}<div class="meta"><div><h3>${w.t}</h3><small>${w.k}</small></div><button class="like" data-i="${i}" aria-pressed="${liked[i]}" aria-label="like ${w.t}">♥ ${likes[i]}</button></div></article>`).join("")}
+$("#grid").addEventListener("click",e=>{const b=e.target.closest(".like");if(!b)return;const i=+b.dataset.i;liked[i]=!liked[i];likes[i]+=liked[i]?1:-1;b.setAttribute("aria-pressed",liked[i]);b.textContent="♥ "+likes[i];b.classList.remove("pop");void b.offsetWidth;b.classList.add("pop")});
+$("#chips").addEventListener("click",e=>{const b=e.target.closest(".chip");if(!b)return;filter=b.dataset.f;$$(".chip").forEach(x=>x.setAttribute("aria-pressed",x===b));render()});
+render();
+</script>
+</body>
+</html>
