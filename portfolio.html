@@ -1,0 +1,666 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+  <title>alex rivera – graphic designer</title>
+  <link href="https://fonts.googleapis.com/css2?family=Gaegu:wght@400;700&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --bg: #FFF9D6;
+      --ink: #1d1d1d;
+      --gray: #7a7768;
+      --line: #d9d4bd;
+      --card: #fffdf0;
+      --coral: #FF6B4A;
+      --green: #2E9E5B;
+      --orange: #FFA63D;
+      --blue: #7FDBFF;
+      --blueD: #2A8FB7;
+      --pink: #F7C6FF;
+      --pinkD: #A86BB8;
+      --link: #2A8FB7;
+      box-sizing: border-box;
+      padding-top: env(safe-area-inset-top, 0px);
+      padding-bottom: env(safe-area-inset-bottom, 0px)
+    }
+
+    @media (prefers-color-scheme:dark) {
+      :root:not([data-theme="light"]) {
+        --bg: #26241a;
+        --ink: #f4efd8;
+        --gray: #a8a38c;
+        --line: #4a4636;
+        --card: #312e22;
+        --link: #7FDBFF
+      }
+    }
+
+    :root[data-theme="dark"] {
+      --bg: #26241a;
+      --ink: #f4efd8;
+      --gray: #a8a38c;
+      --line: #4a4636;
+      --card: #312e22;
+      --link: #7FDBFF
+    }
+
+    html {
+      scroll-padding-top: env(safe-area-inset-top, 0px);
+      scroll-behavior: smooth
+    }
+
+    *,
+    *::before,
+    *::after {
+      box-sizing: border-box
+    }
+
+    body {
+      margin: 0;
+      background: var(--bg);
+      color: var(--ink);
+      font: 400 1.3rem/1.4 Gaegu, "Comic Sans MS", "Comic Neue", cursive;
+      text-align: center
+    }
+
+    h1,
+    h2,
+    h3 {
+      font-weight: 700;
+      margin: 0;
+      line-height: 1.1
+    }
+
+    h1 {
+      font-size: clamp(3rem, 10vw, 5rem)
+    }
+
+    h2 {
+      font-size: 2.4rem
+    }
+
+    a {
+      color: var(--link)
+    }
+
+    .wrap {
+      max-width: 760px;
+      margin: 0 auto;
+      padding: 40px 20px 0
+    }
+
+    .sub {
+      color: var(--gray);
+      margin: 10px 0 0
+    }
+
+    .ul {
+      display: inline-block;
+      border-bottom: 4px solid var(--ink);
+      border-radius: 2px 60% 3px 80%/2px 5px 2px 4px;
+      padding: 0 40px 6px;
+      margin-bottom: 22px
+    }
+
+    .btn {
+      font: inherit;
+      font-weight: 700;
+      font-size: 1.4rem;
+      color: #1d1d1d;
+      border: 0;
+      cursor: pointer;
+      padding: 12px 30px;
+      margin: 6px;
+      border-radius: 12px 8px 14px 9px/9px 13px 8px 12px;
+      transform: rotate(-1.5deg);
+      transition: transform .1s, box-shadow .1s;
+      text-decoration: none;
+      display: inline-block
+    }
+
+    .btn.b {
+      background: var(--blue);
+      box-shadow: -3px 4px 0 var(--blueD)
+    }
+
+    .btn.p {
+      background: var(--pink);
+      box-shadow: -3px 4px 0 var(--pinkD);
+      transform: rotate(1.2deg)
+    }
+
+    .btn:hover {
+      transform: rotate(0) translateY(-2px)
+    }
+
+    .btn:active {
+      transform: translate(-3px, 4px);
+      box-shadow: none
+    }
+
+    :focus-visible {
+      outline: 3px dashed var(--coral);
+      outline-offset: 3px
+    }
+
+    .hero-deco {
+      margin: 24px auto 32px;
+      width: 140px;
+      height: 6px;
+      border-radius: 99px;
+      background: linear-gradient(90deg, var(--coral), var(--orange), var(--blue));
+      opacity: .7
+    }
+
+    section {
+      padding-top: 70px
+    }
+
+    .chips {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: center;
+      gap: 8px;
+      margin-bottom: 22px
+    }
+
+    .chip {
+      font: inherit;
+      font-size: 1.15rem;
+      color: var(--ink);
+      background: var(--card);
+      border: 3px solid var(--line);
+      border-radius: 10px 7px 11px 8px;
+      padding: 2px 16px;
+      cursor: pointer
+    }
+
+    .chip[aria-pressed="true"] {
+      border-color: var(--blueD);
+      background: var(--blue);
+      color: #1d1d1d
+    }
+
+    .grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
+      gap: 20px
+    }
+
+    .work {
+      background: var(--card);
+      border: 3px solid var(--line);
+      border-radius: 12px;
+      padding: 8px;
+      text-align: left;
+      cursor: pointer;
+      transition: transform .15s, box-shadow .15s
+    }
+
+    .work:nth-child(odd) {
+      transform: rotate(-.8deg)
+    }
+
+    .work:nth-child(even) {
+      transform: rotate(.8deg)
+    }
+
+    .work:hover {
+      transform: rotate(0) scale(1.03);
+      box-shadow: 0 6px 22px rgba(0, 0, 0, .12)
+    }
+
+    .work svg {
+      display: block;
+      width: 100%;
+      height: auto;
+      border-radius: 8px
+    }
+
+    .meta {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 8px 4px 0;
+      gap: 8px
+    }
+
+    .meta h3 {
+      font-size: 1.3rem
+    }
+
+    .meta small {
+      display: block;
+      color: var(--gray);
+      font-size: 1.05rem
+    }
+
+    .like {
+      font: inherit;
+      font-size: 1.15rem;
+      color: var(--gray);
+      background: none;
+      border: 3px solid var(--line);
+      border-radius: 999px;
+      padding: 0 12px;
+      cursor: pointer
+    }
+
+    .like[aria-pressed="true"] {
+      color: var(--coral);
+      border-color: var(--coral)
+    }
+
+    .like.pop {
+      animation: pop .25s
+    }
+
+    @keyframes pop {
+      50% {
+        transform: scale(1.3)
+      }
+    }
+
+    .panel {
+      max-width: 620px;
+      margin: 0 auto;
+      background: var(--card);
+      border: 3px solid var(--line);
+      border-radius: 12px;
+      text-align: left
+    }
+
+    .row {
+      display: grid;
+      grid-template-columns: 110px 1fr;
+      gap: 12px;
+      padding: 14px 18px;
+      border-top: 3px solid var(--line)
+    }
+
+    .row:first-child {
+      border-top: 0
+    }
+
+    .row>b {
+      font-weight: 400
+    }
+
+    .row p {
+      margin: 0;
+      color: var(--gray)
+    }
+
+    footer {
+      padding: 70px 0 40px;
+      color: var(--gray);
+      font-size: 1.05rem
+    }
+
+    footer a {
+      color: var(--gray);
+      text-decoration: none;
+      margin: 0 4px
+    }
+
+    footer a:hover {
+      text-decoration: underline
+    }
+
+    /* ── modal ── */
+    .overlay {
+      position: fixed;
+      inset: 0;
+      z-index: 900;
+      background: rgba(29, 29, 29, .55);
+      backdrop-filter: blur(6px);
+      -webkit-backdrop-filter: blur(6px);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: 20px;
+      opacity: 0;
+      pointer-events: none;
+      transition: opacity .22s
+    }
+
+    .overlay.open {
+      opacity: 1;
+      pointer-events: all
+    }
+
+    .modal {
+      position: relative;
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 0;
+      max-width: 820px;
+      width: 100%;
+      background: var(--card);
+      border: 3px solid var(--line);
+      border-radius: 16px 12px 18px 14px/12px 18px 12px 16px;
+      overflow: hidden;
+      transform: translateY(24px) scale(.97);
+      transition: transform .22s, opacity .22s;
+      opacity: 0;
+      max-height: 90vh
+    }
+
+    .overlay.open .modal {
+      transform: none;
+      opacity: 1
+    }
+
+    .modal-art {
+      background: #fff;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: 28px;
+      min-height: 260px
+    }
+
+    .modal-art svg {
+      width: 100%;
+      height: auto;
+      max-height: 320px;
+      border-radius: 10px
+    }
+
+    .modal-info {
+      padding: 28px 26px 28px 20px;
+      text-align: left;
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+      overflow-y: auto;
+      border-left: 3px solid var(--line)
+    }
+
+    .modal-tag {
+      display: inline-block;
+      font-size: 1rem;
+      background: var(--blue);
+      color: #1d1d1d;
+      border-radius: 8px 5px 9px 6px;
+      padding: 1px 14px;
+      margin-bottom: 2px
+    }
+
+    .modal-title {
+      font-size: 2rem;
+      font-weight: 700;
+      line-height: 1.1
+    }
+
+    .modal-year {
+      color: var(--gray);
+      font-size: 1.05rem;
+      margin: 0
+    }
+
+    .modal-desc {
+      color: var(--gray);
+      font-size: 1.15rem;
+      line-height: 1.5;
+      margin: 4px 0 0
+    }
+
+    .modal-details {
+      margin-top: auto;
+      border-top: 2px solid var(--line);
+      padding-top: 14px;
+      display: flex;
+      flex-direction: column;
+      gap: 6px
+    }
+
+    .modal-details div {
+      display: flex;
+      gap: 8px
+    }
+
+    .modal-details dt {
+      font-weight: 700;
+      font-size: 1rem;
+      color: var(--ink);
+      min-width: 90px;
+      flex-shrink: 0
+    }
+
+    .modal-details dd {
+      margin: 0;
+      color: var(--gray);
+      font-size: 1rem
+    }
+
+    .modal-close {
+      position: absolute;
+      top: 12px;
+      right: 14px;
+      font: inherit;
+      font-size: 1.4rem;
+      background: var(--card);
+      border: 2px solid var(--line);
+      border-radius: 50%;
+      width: 36px;
+      height: 36px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      cursor: pointer;
+      z-index: 10;
+      line-height: 1;
+      transition: background .12s, color .12s
+    }
+
+    .modal-close:hover {
+      background: var(--coral);
+      color: #fff;
+      border-color: var(--coral)
+    }
+
+    .modal-like {
+      margin-top: 14px;
+      align-self: flex-start
+    }
+
+    @media(max-width:620px) {
+      .modal {
+        grid-template-columns: 1fr;
+        max-height: 92vh
+      }
+
+      .modal-info {
+        border-left: 0;
+        border-top: 3px solid var(--line);
+        padding: 20px
+      }
+
+      .row {
+        grid-template-columns: 1fr;
+        gap: 2px
+      }
+    }
+
+    @media(prefers-reduced-motion:reduce) {
+      * {
+        animation: none !important;
+        transition: none !important;
+        scroll-behavior: auto !important
+      }
+    }
+  </style>
+</head>
+
+<body>
+  <div class="wrap">
+    <header>
+      <h1>alina arora</h1>
+      <p class="sub">graphic designer for brands, illustrations, posters and other cute stuff</p>
+      <div class="hero-deco" aria-hidden="true"></div>
+      <div><a class="btn b" href="#work" id="hero-cta-work">see work</a><a class="btn p" href="#about"
+          id="hero-cta-about">get in touch</a></div>
+    </header>
+
+    <section id="work">
+      <h2 class="ul">work</h2>
+      <div class="chips" id="chips">
+        <button class="chip" aria-pressed="true" data-f="All">all</button>
+        <button class="chip" aria-pressed="false" data-f="branding">branding</button>
+        <button class="chip" aria-pressed="false" data-f="illustration">illustration</button>
+        <button class="chip" aria-pressed="false" data-f="print">print</button>
+        <button class="chip" aria-pressed="false" data-f="Likes">most liked</button>
+      </div>
+      <div class="grid" id="grid"></div>
+    </section>
+
+
+
+    <section id="about">
+      <h2 class="ul">about</h2>
+      <div class="panel">
+        <div class="row"><b>hi</b>
+          <p>i’m alina, a graphic designer who likes cats, pastel colors and envelopes.</p>
+        </div>
+        <div class="row"><b>services</b>
+          <p>logos and brand systems, illustration and character design, posters, packaging and editorial layouts.</p>
+        </div>
+        <div class="row"><b>say hi</b>
+          <p><a href="mailto:alina.arora21@gmail.com">alina.arora21@gmail.com</a></p>
+        </div>
+      </div>
+    </section>
+
+    <footer><a href="#work">work</a>|<a href="#about">about</a>|<a href="#">instagram</a>|<a href="#">behance</a>|<a
+        href="mailto:hello@example.com">email</a></footer>
+  </div>
+
+  <!-- expanded work modal -->
+  <div class="overlay" id="overlay" role="dialog" aria-modal="true" aria-labelledby="modal-title-text">
+    <div class="modal" id="modal">
+      <button class="modal-close" id="modal-close" aria-label="close">&#x2715;</button>
+      <div class="modal-art" id="modal-art"></div>
+      <div class="modal-info">
+        <span class="modal-tag" id="modal-tag"></span>
+        <h2 class="modal-title" id="modal-title-text"></h2>
+        <p class="modal-year" id="modal-year"></p>
+        <p class="modal-desc" id="modal-desc"></p>
+        <dl class="modal-details" id="modal-details"></dl>
+        <button class="like modal-like" id="modal-like" aria-label="like"></button>
+      </div>
+    </div>
+  </div>
+
+  <script>
+    const $ = s => document.querySelector(s), $$ = s => document.querySelectorAll(s);
+
+    const works = [
+      {
+        t: "bean there", k: "branding", y: 2024, c: ["#FFD966", "#FF6B4A", "#1d1d1d"], s: 0,
+        desc: "A cozy coffee brand identity built around warmth and hand-drawn charm. Includes logo, cups, bags and a full color system.",
+        details: { client: "Bean There Cafe", deliverables: "Logo, packaging, brand guide", tools: "Illustrator, Procreate" }
+      },
+      {
+        t: "moon picnic", k: "illustration", y: 2023, c: ["#7FDBFF", "#FFD966", "#ffffff"], s: 1,
+        desc: "Editorial illustration series for a children's book about a rabbit who picnics on the moon every Tuesday.",
+        details: { client: "Dreamy Press", deliverables: "12-page illustration set", tools: "Procreate" }
+      },
+      {
+        t: "loud fest", k: "print", y: 2024, c: ["#F7C6FF", "#2E9E5B", "#1d1d1d"], s: 2,
+        desc: "Poster series for an outdoor music festival. Bold risograph-inspired palette with loud layered type.",
+        details: { client: "Loud Fest Collective", deliverables: "A2 poster x3, social kit", tools: "Illustrator, Affinity Publisher" }
+      },
+      {
+        t: "pocket dragons", k: "illustration", y: 2022, c: ["#B8EFC5", "#2A8FB7", "#1d1d1d"], s: 3,
+        desc: "Character design for a mobile game -- 24 pocket-sized dragons with unique traits, idle animations and color variants.",
+        details: { client: "Inkpot Games", deliverables: "24 characters + sprite sheets", tools: "Procreate, Aseprite" }
+      },
+      {
+        t: "tidal records", k: "branding", y: 2023, c: ["#1d1d1d", "#7FDBFF", "#FFD966"], s: 4,
+        desc: "Brand identity for an independent record label rooted in surf culture. Dark base with electric accents.",
+        details: { client: "Tidal Records", deliverables: "Logo, vinyl sleeve, merch", tools: "Illustrator, Photoshop" }
+      },
+      {
+        t: "seed packets", k: "print", y: 2024, c: ["#FFE9A8", "#2E9E5B", "#FF6B4A"], s: 5,
+        desc: "Packaging design for a heritage seed company -- botanical illustrations paired with earthy, tactile typography.",
+        details: { client: "Slow Garden Co.", deliverables: "18-SKU packet range", tools: "Illustrator, InDesign" }
+      }
+    ];
+    const likes = works.map((w, i) => 3 + i * 4 % 9), liked = works.map(() => false);
+    function art(w) {
+      const [a, b, c] = w.c, o = 'stroke="#1d1d1d" stroke-width="4"'; const sh = [
+        `<circle cx="130" cy="100" r="64" fill="${b}" ${o}/><rect x="190" y="90" width="110" height="60" rx="14" fill="${c}" ${o}/>`,
+        `<circle cx="200" cy="90" r="60" fill="${b}" ${o}/><path d="M0 200Q100 120 200 180T400 150V240H0Z" fill="${c}" ${o}/>`,
+        `<rect x="60" y="30" width="110" height="170" fill="${b}" ${o} transform="rotate(-8 115 115)"/><rect x="210" y="50" width="120" height="150" rx="60" fill="${c}" ${o}/>`,
+        `<path d="M60 190L130 50L200 190Z" fill="${b}" ${o}/><circle cx="280" cy="110" r="46" fill="${c}" ${o}/>`,
+        `<circle cx="130" cy="120" r="56" fill="none" stroke="${b}" stroke-width="20"/><circle cx="270" cy="120" r="56" fill="${c}" ${o}/>`,
+        `<rect x="50" y="50" width="90" height="140" rx="45" fill="${b}" ${o}/><rect x="160" y="50" width="90" height="140" rx="12" fill="${c}" ${o}/><circle cx="320" cy="120" r="40" fill="${a}" ${o}/>`][w.s];
+      return `<svg viewBox="0 0 400 240" role="img" aria-label="${w.t} artwork"><rect width="400" height="240" fill="${a}"/>${sh}</svg>`
+    }
+    let filter = "All";
+    function render() {
+      let l = works.map((w, i) => ({ w, i }));
+      if (filter === "Likes") l.sort((x, y) => likes[y.i] - likes[x.i]);
+      else if (filter !== "All") l = l.filter(x => x.w.k === filter);
+      $("#grid").innerHTML = l.map(({ w, i }) => `
+    <article class="work" data-i="${i}" tabindex="0" role="button" aria-label="open ${w.t}">
+      ${art(w)}
+      <div class="meta">
+        <div><h3>${w.t}</h3><small>${w.k}</small></div>
+        <button class="like" data-i="${i}" aria-pressed="${liked[i]}" aria-label="like ${w.t}">&#9829; ${likes[i]}</button>
+      </div>
+    </article>`).join("")
+    }
+    $("#grid").addEventListener("click", e => {
+      const lb = e.target.closest(".like");
+      if (lb) { const i = +lb.dataset.i; liked[i] = !liked[i]; likes[i] += liked[i] ? 1 : -1; lb.setAttribute("aria-pressed", liked[i]); lb.textContent = "\u2665 " + likes[i]; lb.classList.remove("pop"); void lb.offsetWidth; lb.classList.add("pop"); return }
+      const card = e.target.closest(".work");
+      if (card) openModal(+card.dataset.i);
+    });
+    $("#grid").addEventListener("keydown", e => {
+      if (e.key === "Enter" || e.key === " ") { const card = e.target.closest(".work"); if (card) { e.preventDefault(); openModal(+card.dataset.i) } }
+    });
+    const overlay = $("#overlay");
+    function openModal(i) {
+      const w = works[i];
+      $("#modal-art").innerHTML = art(w);
+      $("#modal-tag").textContent = w.k;
+      $("#modal-title-text").textContent = w.t;
+      $("#modal-year").textContent = w.y;
+      $("#modal-desc").textContent = w.desc;
+      const ml = $("#modal-like");
+      ml.dataset.i = i; ml.setAttribute("aria-pressed", liked[i]);
+      ml.textContent = "\u2665 " + likes[i] + (liked[i] ? " (liked)" : "");
+      ml.style.color = liked[i] ? "var(--coral)" : "var(--gray)";
+      ml.style.borderColor = liked[i] ? "var(--coral)" : "var(--line)";
+      const dl = $("#modal-details");
+      dl.innerHTML = Object.entries(w.details).map(([k, v]) => `<div><dt>${k}</dt><dd>${v}</dd></div>`).join("");
+      overlay.classList.add("open");
+      document.body.style.overflow = "hidden";
+      $("#modal-close").focus();
+    }
+    function closeModal() { overlay.classList.remove("open"); document.body.style.overflow = "" }
+    $("#modal-close").onclick = closeModal;
+    overlay.addEventListener("click", e => { if (e.target === overlay) closeModal() });
+    document.addEventListener("keydown", e => { if (e.key === "Escape") closeModal() });
+    $("#modal-like").addEventListener("click", () => {
+      const i = +$("#modal-like").dataset.i;
+      liked[i] = !liked[i]; likes[i] += liked[i] ? 1 : -1;
+      const ml = $("#modal-like");
+      ml.setAttribute("aria-pressed", liked[i]);
+      ml.textContent = "\u2665 " + likes[i] + (liked[i] ? " (liked)" : "");
+      ml.style.color = liked[i] ? "var(--coral)" : "var(--gray)";
+      ml.style.borderColor = liked[i] ? "var(--coral)" : "var(--line)";
+      ml.classList.remove("pop"); void ml.offsetWidth; ml.classList.add("pop");
+      const gb = $("#grid").querySelector(`.like[data-i="${i}"]`);
+      if (gb) { gb.setAttribute("aria-pressed", liked[i]); gb.textContent = "\u2665 " + likes[i] }
+    });
+    $("#chips").addEventListener("click", e => { const b = e.target.closest(".chip"); if (!b) return; filter = b.dataset.f; $$(".chip").forEach(x => x.setAttribute("aria-pressed", x === b)); render() });
+    render();
+  </script>
+</body>
+
+</html>
